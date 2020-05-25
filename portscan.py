@@ -1,5 +1,4 @@
 import socket
-
 # AF_NET == ipv4
 # SOCK_STREAM == TCP
 
@@ -10,20 +9,14 @@ targetIP = socket.gethostbyname(target)
 
 print("Now scanning", targetIP)
 
-def pscan(port):
-    try:
-        # connect to the target
-        s.connect((target, port))
-        return True
-    except:
-        return False
-
-# just scan the first 22 ports for script testing purposes
-for x in range(1,23):
-    if pscan(x):
-        #pscan(x) is either returning True or False
-        # if pscan is true, print that port x is open
-        print('Port',x,'is open!')
-    else:
-        print('Port',x,'is closed')
+# low port range for the sake of time, will increase when we add threading
+for port in range(78,82):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # we needed to change connect to connect_ex
+    c = s.connect_ex((targetIP,port))
+    if c == 0:
+        print('Port',port,'is open!')
+        s.close()
+   # else:
+    #    print('Port',x,'is closed')
 
