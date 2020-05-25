@@ -2,8 +2,6 @@ import socket
 # AF_NET == ipv4
 # SOCK_STREAM == TCP
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 target = input('Where to scan?: ')
 targetIP = socket.gethostbyname(target)
 
@@ -17,6 +15,4 @@ for port in range(78,82):
     if c == 0:
         print('Port',port,'is open!')
         s.close()
-   # else:
-    #    print('Port',x,'is closed')
 
